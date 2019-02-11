@@ -17,4 +17,4 @@ We also have two properties we are concerned about:
 1. **Phase Difference**: how many degrees between each intersection? (here it is 5°)
 2. **Overlaps per Rotation**: in a 360° rotation, how many total intersections? (here it is 72)
 
-  [1]: https://i.stack.imgur.com/Ajelx.gif
+  [1]: Sample.gif
