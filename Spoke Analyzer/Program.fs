@@ -27,11 +27,16 @@ let main argv =
     let rec getRotation small large =
         if small > large then
             getRotation large small
-        else        
-            let v1 = large / small
-            let divisions = v1 |> int |> float
-            let v2 = min (large - small) (large - small * divisions)            
-            min (FULL_CIRCLE / v1) v2
+        else
+            if small = large then
+                small
+            else
+                let v1 = large / small
+                let divisions = v1 |> int |> float
+                let v2 = min (large - small) (large - small * divisions)
+                
+                let v1 = FULL_CIRCLE / v1
+                min v1 v2
         
     let rotation = getRotation angleDegrees1 angleDegrees2
     let rotations = FULL_CIRCLE / rotation
