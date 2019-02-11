@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="Math.fs" />
     <Compile Include="Graphics.fs" />
     <Compile Include="Input.fs" />
+    <Compile Include="IO.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

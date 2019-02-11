@@ -9,7 +9,10 @@ let rec getInput convert validate prompt =
     else
         printfn "Invalid, please try again."
         getInput convert validate prompt
-let getInputInt = getInput Int32.Parse (Int32.TryParse >> function | true, f when f > 0 -> true | _ -> false)
+let getInputInt =
+    getInput
+        Int32.Parse
+        (Int32.TryParse >> function | true, f when f > 0 -> true | _ -> false)
 let getInputIntOption =
     getInput
         (function | "" -> None | s -> s |> Int32.Parse |> Some)
@@ -18,7 +21,10 @@ let getInputDoubleOption =
     getInput
         (function | "" -> None | s -> s |> Double.Parse |> Some)
         (function | "" -> true | s -> s |> Double.TryParse |> function | true, f when f >= 0. && f <= 1. -> true | _ -> false)
-let getInputDouble = getInput Double.Parse (Double.TryParse >> function | true, f when f >= 0. && f <= 1. -> true | _ -> false)
+let getInputDouble =
+    getInput
+        Double.Parse
+        (Double.TryParse >> function | true, f when f >= 0. && f <= 1. -> true | _ -> false)
 let getInputFileOption (file : string) =
     getInput
         (function | "" -> None | s -> Some s)
