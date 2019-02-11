@@ -14,7 +14,7 @@ For this particular image, we have two shapes:
 
 We also have two properties we are concerned about:
 
-1. **Phase Difference**: how many degrees between each intersection? (here it is 5°)
+1. **Overlap Angle Difference**: how many degrees between each intersection? (here it is 5°)
 2. **Overlaps per Rotation**: in a 360° rotation, how many total intersections? (here it is 72)
 
   [1]: Sample.gif
