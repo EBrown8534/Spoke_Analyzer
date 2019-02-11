@@ -28,8 +28,8 @@ let main argv =
         if small > large then
             getRotation large small
         else
-            if small = large then
-                small
+            if small = large then small
+            elif large = FULL_CIRCLE then small
             else
                 let v1 = large / small
                 let divisions = v1 |> int |> float
