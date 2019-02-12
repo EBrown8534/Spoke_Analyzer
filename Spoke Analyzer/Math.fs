@@ -6,10 +6,10 @@ let inline angleMath distance angle fn = (distance * (angle |> degToRad |> fn)) 
 
 let getXY distance angle = cos |> angleMath distance angle, sin |> angleMath distance angle
 
-let getRotation small large smallCount largeCount =
-    ([|0..smallCount|], [|0..largeCount|])
-    ||> Array.allPairs
-    |> Array.map (fun (smalli, largei) -> abs ((smalli |> float) * small - (largei |> float) * large))
-    |> Array.filter ((<) 0.)
-    |> Array.min
-    
+let rec getOverlaps smallCount largeCount =
+    if smallCount > largeCount then getOverlaps largeCount smallCount
+    else
+        let v = (smallCount |> float) * (largeCount |> float) 
+        if largeCount % smallCount <> 0 then v
+        else v / (smallCount |> float)
+        
