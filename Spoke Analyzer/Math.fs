@@ -18,4 +18,14 @@ let rec getRotation fullCircle small large =
             let divisions2 = divisions1 + 1.
             let smallOfDivisions = min (large - small * divisions1) (small * divisions2 - large)
             let v2 = min (large - small) smallOfDivisions
-            min (fullCircle / v1) v2
+            let v = min (fullCircle / v1) v2
+            let rec getMin smallA largeA min =
+                let test = abs (smallA - largeA)
+                if smallA < 360. then
+                    if largeA < 360. && test > 0. then
+                        getMin smallA (largeA + large) (if test < min then test else min)
+                    else
+                        getMin (smallA + small) large min
+                else
+                    min
+            getMin small large v
