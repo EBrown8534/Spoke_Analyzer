@@ -14,6 +14,8 @@ let rec getRotation fullCircle small large =
         elif large = fullCircle then small
         else
             let v1 = large / small
-            let divisions = v1 |> int |> float
-            let v2 = min (large - small) (large - small * divisions)
+            let divisions1 = v1 |> int |> float
+            let divisions2 = divisions1 + 1.
+            let smallOfDivisions = min (large - small * divisions1) (small * divisions2 - large)
+            let v2 = min (large - small) smallOfDivisions
             min (fullCircle / v1) v2
