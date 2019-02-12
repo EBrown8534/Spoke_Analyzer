@@ -9,7 +9,9 @@ let getXY distance angle = cos |> angleMath distance angle, sin |> angleMath dis
 let rec getOverlaps smallCount largeCount =
     if smallCount > largeCount then getOverlaps largeCount smallCount
     else
-        let v = (smallCount |> float) * (largeCount |> float) 
-        if largeCount % smallCount <> 0 then v
-        else v / (smallCount |> float)
+        let totalOverlaps = (smallCount |> float) * (largeCount |> float)
+        // If the small divides into large evenly, then there are `small` coincident spokes, and we'll divide our total
+        // overlap count by that number.
+        if largeCount % smallCount <> 0 then totalOverlaps
+        else totalOverlaps / (smallCount |> float)
         
