@@ -1,6 +1,4 @@
-﻿open System
-open System.Drawing
-open Spoke_Analyzer
+﻿open System.Drawing
 open Spoke_Analyzer
 
 [<Literal>]
