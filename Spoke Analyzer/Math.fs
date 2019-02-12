@@ -6,26 +6,10 @@ let inline angleMath distance angle fn = (distance * (angle |> degToRad |> fn)) 
 
 let getXY distance angle = cos |> angleMath distance angle, sin |> angleMath distance angle
 
-let rec getRotation fullCircle small large =
-    if small > large then
-        getRotation fullCircle large small
-    else
-        if small = large then small
-        elif large = fullCircle then small
-        else
-            let v1 = large / small
-            let divisions1 = v1 |> int |> float
-            let divisions2 = divisions1 + 1.
-            let smallOfDivisions = min (large - small * divisions1) (small * divisions2 - large)
-            let v2 = min (large - small) smallOfDivisions
-            let v = min (fullCircle / v1) v2
-            let rec getMin smallA largeA min =
-                let test = abs (smallA - largeA)
-                if smallA < 360. then
-                    if largeA < 360. && test > 0. then
-                        getMin smallA (largeA + large) (if test < min then test else min)
-                    else
-                        getMin (smallA + small) large min
-                else
-                    min
-            getMin small large v
+let getRotation small large smallCount largeCount =
+    ([|0..smallCount|], [|0..largeCount|])
+    ||> Array.allPairs
+    |> Array.map (fun (smalli, largei) -> abs ((smalli |> float) * small - (largei |> float) * large))
+    |> Array.filter ((<) 0.)
+    |> Array.min
+    

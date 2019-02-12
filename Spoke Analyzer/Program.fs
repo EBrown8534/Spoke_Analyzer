@@ -24,7 +24,7 @@ let main argv =
     let fps = ffmpeg |> Option.bind (fun s -> Input.getInputIntOption "Enter the fps of the output (whole number > 0) [24]: ") |> Option.defaultValue 24    
     printfn ""
     
-    let angleDifference = Spoke_Analyzer.Math.getRotation FULL_CIRCLE shape1.Angle shape2.Angle
+    let angleDifference = Spoke_Analyzer.Math.getRotation shape1.Angle shape2.Angle shape1.Spokes shape2.Spokes
     let totalRotations = FULL_CIRCLE / angleDifference
         
     IMAGE_DIR |> Spoke_Analyzer.IO.createDirIfNotExists |> ignore
