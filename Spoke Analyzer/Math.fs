@@ -6,13 +6,21 @@ let inline angleMath distance angle fn = (distance * (angle |> degToRad |> fn)) 
 
 let inline getXY distance angle = cos |> angleMath distance angle, sin |> angleMath distance angle
 
+let inline gcd a b =
+    let mutable a = a
+    let mutable b = b
+
+    while b > 0 do
+        let temp = a
+        a <- b
+        b <- temp % b
+    a
+
 let inline getOverlaps count1 count2 =
     let inline calculation smallCount largeCount =
         let totalOverlaps = (smallCount |> float) * (largeCount |> float)
-        // If the small divides into large evenly, then there are `small` coincident spokes, and we'll divide our total
-        // overlap count by that number.
-        if largeCount % smallCount <> 0 then totalOverlaps
-        else totalOverlaps / (smallCount |> float)
+        // Divide by the GCD of the two as that will be how many active overlaps there are.
+        totalOverlaps / (gcd smallCount largeCount |> float)
 
     if count1 > count2 then calculation count2 count1
     else calculation count1 count2 
