@@ -7,10 +7,9 @@ let inline angleMath distance angle fn = (distance * (angle |> degToRad |> fn)) 
 let inline getXY distance angle = cos |> angleMath distance angle, sin |> angleMath distance angle
 
 let inline gcd a b =
-    let mutable a = a
-    let mutable b = b
+    let mutable a, b = a, b
 
-    while b > 0 do
+    while b > LanguagePrimitives.GenericZero do
         let temp = a
         a <- b
         b <- temp % b
